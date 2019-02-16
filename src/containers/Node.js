@@ -29,20 +29,22 @@ export class Node extends Component {
       }).then(
         res => {
           const { changeNode, addChild, createNode, id, num } = this.props     
+          if(res.data != null && res.data.childs.length > 0){
           mainTreeArray.push(res.data);
-          if(mainTreeArray && mainTreeArray != null){
-            let innerTreeArray = mainTreeArray[0];
-            if(innerTreeArray && innerTreeArray != null){
-              let childsArray = innerTreeArray.childs;
-              if(childsArray && childsArray != null && childsArray.length > 0){
-                for (let i = 0; i < childsArray.length; i++) {
-                  const childId = createNode(childsArray[i].name, childsArray[i].id).nodeId
-                  addChild(id, childId, true)
-                } 
-                mainTreeArray = [];
+            if(mainTreeArray && mainTreeArray != null){
+              let innerTreeArray = mainTreeArray[0];
+              if(innerTreeArray && innerTreeArray != null){
+                let childsArray = innerTreeArray.childs;
+                if(childsArray && childsArray != null && childsArray.length > 0){
+                  for (let i = 0; i < childsArray.length; i++) {
+                    const childId = createNode(childsArray[i].name, childsArray[i].id).nodeId
+                    addChild(id, childId, true)
+                  } 
+                  mainTreeArray = [];
+                }
               }
-            }
-          }               
+            }  
+          }             
       }).catch((err) => {
         console.log(err);
       });
