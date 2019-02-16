@@ -63,9 +63,9 @@ export class Node extends Component {
   render() {
     const { name, num, expanded, id, parentId, childIds } = this.props
     return (
-        <div>
+        <div id={`tree-div-${num}`}>
             <span onClick={(e) => this.handleAddChildClick(e, num, expanded, id, parentId)}>+</span>
-            {name}            
+            <span>{name}</span>         
             <ul id={`tree-ul-${num}`}>
                 {childIds.map(this.renderChild)}
             </ul>
