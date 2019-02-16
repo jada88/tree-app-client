@@ -9,6 +9,8 @@ let mainTreeArray = [];
 export class Node extends Component {
   handleAddChildClick = (e, num, expanded, id, parentId) => {
     e.preventDefault()  
+    const expSpanElement = `tree-exp-${num}`;
+    document.getElementById(expSpanElement).innerHTML = document.getElementById(expSpanElement).innerHTML == "+" ? "-" : "+";
     const treeUlElement = `tree-ul-${num}`;
     let elementExists = document.getElementById(treeUlElement);
     if(elementExists != null && elementExists.childElementCount > 0 && elementExists.style.display == "block"){
@@ -64,7 +66,7 @@ export class Node extends Component {
     const { name, num, expanded, id, parentId, childIds } = this.props
     return (
         <div id={`tree-div-${num}`}>
-            <span onClick={(e) => this.handleAddChildClick(e, num, expanded, id, parentId)}>+</span>
+            <span id={`tree-exp-${num}`} onClick={(e) => this.handleAddChildClick(e, num, expanded, id, parentId)}>+</span>
             <span>{name}</span>         
             <ul id={`tree-ul-${num}`}>
                 {childIds.map(this.renderChild)}
